@@ -10,45 +10,32 @@
 using namespace std;
 
 Matrix A(3,3);
-Matrix B(2,1);
+Matrix B(3,3);
 Matrix dest(3,3);
 
 int main()
 {
+	A.set(0,0,2);
+	A.set(0,1,1);
+	A.set(0,2,0);
+	A.set(1,0,1);
+	A.set(1,1,2);
+	A.set(1,2,1);
+	A.set(2,0,0);
+	A.set(2,1,1);
+	A.set(2,2,2);
+
+
 	//int error = matrixMul(&dest, &A, &B);
-	//int error = cholInv(&dest, &A);
-	//	cout << "A: " << endl;
-	//	for(int i = 0; i < (A.rows * A.cols); i++)
-	//	{
-	//		cout << A.pdata[i] << endl;
-	//	}
-	//
-	//	cout << "\nDest: " << endl;
-	//	for(int i = 0; i < (dest.rows * dest.cols); i++)
-	//	{
-	//		cout << dest.pdata[i] << endl;
-	//	}
-	//
-	//	cout << "\nError code: " << error;
+	int error = cholInv(&dest, &A);
 
-	int n = 3, foundSets = 1;
-	int* set = new int[n];
-	int fact = 1;
-
-	for(int i = 0; i < n; i++)
+	cout << "\nInverse of A:" << endl;
+	for(int i = 0; i < (dest.rows * dest.cols); i++)
 	{
-		fact *= (n-i);
-		set[i] = i;
+		cout << dest.pdata[i] << endl;
 	}
 
-	int* checkedSets = (int*)malloc(fact * n * sizeof(int));
+	cout << "\nError code: " << error;
 
-	while(foundSets < fact)
-	{
-		int switchSpot, value;
-		foundSets++;
-	}
-
-	free(checkedSets); // Clear that shit up
 	return 1;
 }
