@@ -93,7 +93,6 @@ uint8_t cholInv(Matrix_t* dest, Matrix_t* A)
 		return MATRIX_INPUT_DIM_ERR;
 
 	// Both A and dest are square
-	// Proceeeeed
 	int n = A->cols;
 	Matrix destInv(n,n), destTr(n,n);
 
@@ -136,7 +135,6 @@ uint8_t cholInv(Matrix_t* dest, Matrix_t* A)
 		}
 	}
 
-	// BELOW HERE THINGS DON'T WORK
 	for(int i = 0; i<n; i++)
 	{
 		destInv.pdata[i*n + i] = 1;
