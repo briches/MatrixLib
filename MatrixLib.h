@@ -212,5 +212,23 @@ uint8_t matrixMul(Matrix_t* dest, Matrix_t* A, Matrix_t* B)
 	return NO_ERROR;
 };
 
+uint8_t matrixTranspose(Matrix_t* dest, Matrix_t* A)
+{
+	/** uint8_t error = matrixTranspose(&dest, &A); **/
+	// Returns the transpose of a square matrix A
+
+	if(A->rows != A->cols)
+		return MATRIX_INPUT_DIM_ERR;
+
+	for(int i = 0; i < A->rows * A->rows; i++)
+	{
+		for(int j = 0; j < A->rows; j++)
+		{
+			dest->pdata[j*A->rows + i] = A->pdata[i*A->rows + j];
+		}
+	}
+
+};
+
 
 #endif // OSQ_MATRIXLIB_H_INCLUDED
