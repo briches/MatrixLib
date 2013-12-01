@@ -1,10 +1,14 @@
 /* Matrix library for implementing matrix math with low resource consumption */
-
+/*
+	Author: Brandon Riches
+	Modified: Dec 1st, 2013
+*/
 /**//** Included functions: /**//**/
 // typedef Matrix_t
 // constructor Matrix_t(int nrows, int ncols)
 // destructor ~Matrix_t()
 // void Matrix_t :: set(int row, int col, double value)
+#pragma once
 
 #ifndef OSQ_MATRIXLIB_H_INCLUDED
 #define OSQ_MATRIXLIB_H_INCLUDED
@@ -68,6 +72,8 @@ Matrix_t :: ~Matrix_t()
 	------------------------------------*/
 uint8_t matrixMul(Matrix_t* dest, Matrix_t* A, Matrix_t* B);
 uint8_t cholInv(Matrix_t* dest, Matrix_t* A);
+uint8_t matrixAdd(Matrix_t* dest, Matrix_t* A,Matrix_t* B);
+uint8_t matrixTranspose(Matrix_t* dest, Matrix_t* A);
 
 /*=======================================================
 	Main Matrix Methods
@@ -134,13 +140,6 @@ uint8_t cholInv(Matrix_t* dest, Matrix_t* A)
 			destTr.pdata[j*n + i] = dest->pdata[i*n + j];
 		}
 	}
-
-	cout << "start\n";
-	for(int i = 0; i< n*n; i++)
-	{
-		cout << dest->pdata[i] << endl;
-	}
-	cout << "done\n";
 
 	for(int i = 0; i<n; i++)
 	{
@@ -227,6 +226,32 @@ uint8_t matrixTranspose(Matrix_t* dest, Matrix_t* A)
 			dest->pdata[j*A->rows + i] = A->pdata[i*A->rows + j];
 		}
 	}
+	return NO_ERROR;
+
+};
+
+uint8_t matrixAdd(Matrix_t* dest, Matrix_t* A,Matrix_t* B)
+{
+	if(A->rows != B->rows)
+		return MATRIX_INPUT_DIM_ERR;
+
+	if(A->cols != B->cols)
+		return MATRIX_INPUT_DIM_ERR;
+
+	if(dest->rows != A->rows)
+		return MATRIX_OUTPUT_DIM_ERR;
+
+	if(dest->cols != A->cols)
+		return MATRIX_OUTPUT_DIM_ERR;
+
+	for(int i = 0; i< A->rows; i++)
+	{
+		for(int j = 0; j < A->cols; j++)
+		{
+			dest->pdata[i*A->cols + j] = A->pdata[i*A->cols + j] + B->pdata[i*A->cols + j];
+		}
+	}
+	return NO_ERROR;
 
 };
 
