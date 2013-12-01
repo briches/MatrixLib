@@ -135,6 +135,13 @@ uint8_t cholInv(Matrix_t* dest, Matrix_t* A)
 		}
 	}
 
+	cout << "start\n";
+	for(int i = 0; i< n*n; i++)
+	{
+		cout << dest->pdata[i] << endl;
+	}
+	cout << "done\n";
+
 	for(int i = 0; i<n; i++)
 	{
 		destInv.pdata[i*n + i] = 1;
